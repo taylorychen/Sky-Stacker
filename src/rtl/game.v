@@ -33,29 +33,47 @@ module game(
     output [3:0] ANODE
     );
     
+    wire [9:0] stack_x;
+    wire [9:0] stack_y;
+    wire [9:0] stack_height;
+    wire [32:0] colors;
+
     
+    wire display_clk;
+    wire seg_clk;
+    wire fall_clk;
+
+    clk_divider dv (
+            .clk(clk), 
+            .rst(rst), 
+            .fall_clk(fall_clk),
+            .segclk(segclk),
+            .dclk(dclk)
+        );
+
     stack s(
-    // inputs
-        .clk (),
-        .rst (),
-        .left (),
-        .right (),
-    // outputs
-        .pos_x (),
-        .pos_y (),
-        .height ()
+        // inputs
+        .clk (clk),
+        .rst (rst),
+        .left (left),
+        .right (right),
+        // outputs
+        .pos_x (stack_x),
+        .pos_y (stack_y),
+        .height (stack_height),
+        .colors (colors)
     );
     
     draw d(
         //inputs
-        .clk (clk),
+        .display_clk (display_clk),
         //.rst (start),
-        .[9:0] pos_x (),
+        .[9:0] pos_x (stack_x),
         //.[9:0] pos_y (),
         //.[9:0] height (),
         //outputs
-        .HS (),
-        .VS (),
+        .HS (HS),
+        .VS (VS),
         .[2:0] RED (RED),
         .[2:0] GREEN (GREEN),
         .[1:0] BLUE (BLUE)
