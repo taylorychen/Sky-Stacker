@@ -70,7 +70,7 @@ module clk_divider(
             fall_clk <= 1'b0;   
         end
         
-        else if (fall_cnt == 32'd12500000 - 1'b1) begin
+        else if (fall_cnt == 32'd50000000 - 1'b1) begin
             fall_clk <= ~fall_clk;
             fall_cnt <= 32'd0;
         end
