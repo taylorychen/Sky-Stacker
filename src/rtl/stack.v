@@ -29,16 +29,16 @@ module stack(
     output [31:0] colors
     );
 
-    assign pos_x = 305;
+    //assign pos_x = 305;
     assign pos_y = 360;
     assign height = 1;
     assign colors = 32'b00_00_00_00_00_00_00_00_00_10_10_11_11_10_11_01;
 
     // FOR NEXT TIME
     // MOVEMENT
-    /*
+    
     reg [9:0] x;
-    reg [15:0] divider;
+    reg [17:0] divider;
 
     always @(posedge clk, posedge rst) begin
         // reset condition
@@ -52,11 +52,15 @@ module stack(
                     if (x <= 640 - 150)
                         x <= x + 1;
                 end
+                else if (right == 1) begin
+                    if (x > 0)
+                        x <= x - 1;
+                end
             end
         end
    end
     
    assign pos_x = x; 
-    */
+    
 
 endmodule

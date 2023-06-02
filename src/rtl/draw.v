@@ -52,7 +52,7 @@ module draw(
         wire [9:0] x, y;
         
         reg [9:0] HEIGHT_RATIO = 20;
-        reg [9:0] WIDTH = 150;
+        reg [9:0] WIDTH = 100;
         
         // reg [9:0] p_x = 260;
         reg [9:0] p_y = 400;
@@ -68,7 +68,7 @@ module draw(
         reg [15:0] r = 0;
         reg [15:0] b = 0;
         always @(*) begin
-            g[0] = (x > _x) & (x < pos_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
+            g[0] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
         //    r[0] = 0;
         //    b[0] = 0;
         end
