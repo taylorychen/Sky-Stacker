@@ -19,10 +19,9 @@ module game(
     wire [9:0] stack_height;
     wire [32:0] colors;
 
-    
-    wire display_clk;
-    wire seg_clk;
-    wire fall_clk;
+    // wire display_clk;
+    // wire seg_clk;
+    // wire fall_clk;
     
    clk_divider dv (
           .clk(clk), 
@@ -41,7 +40,8 @@ module game(
     // outputs
         .pos_x (stack_x),
         .pos_y (stack_y),
-        .height (stack_height)
+        .height (stack_height),
+        .colors (colors)
     );
     
     draw d(
@@ -51,6 +51,7 @@ module game(
         .pos_x (stack_x),
         //.[9:0] pos_y (),
         //.[9:0] height (),
+        .colors (colors),
         //outputs
         .HS (HS),
         .VS (VS),
