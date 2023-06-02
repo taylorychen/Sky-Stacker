@@ -22,8 +22,8 @@ module clk_divider(
     input clk,
     input rst,
     output reg fall_clk,
-    output segclk,
-    output dclk
+    output wire seg_clk,
+    output wire dclk
     );
 
     reg [31:0] fall_cnt;
@@ -95,10 +95,10 @@ module clk_divider(
             q <= q + 1;
     end
 
-    // 50Mhz ÷ 2^17 = 381.47Hz
-    assign segclk = q[16];
+    // 50Mhz Ã· 2^17 = 381.47Hz
+    assign seg_clk = q[16];
 
-    // 50Mhz ÷ 2^1 = 25MHz
+    // 50Mhz Ã· 2^1 = 25MHz
     assign dclk = q[1];
     
 endmodule
