@@ -63,14 +63,14 @@ module clk_divider(
     end
     */
     
-    // fall clk - TODO: change the frequency of this clock
+    // fall clk - 4 Hz
     always @(posedge clk or posedge rst) begin
         if (rst == 1) begin
             fall_cnt <= 32'd0;
             fall_clk <= 1'b0;   
         end
         
-        else if (fall_cnt == 32'd50000000 - 1'b1) begin
+        else if (fall_cnt == 32'd12500000 - 1'b1) begin
             fall_clk <= ~fall_clk;
             fall_cnt <= 32'd0;
         end

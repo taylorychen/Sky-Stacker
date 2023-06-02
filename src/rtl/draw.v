@@ -35,23 +35,6 @@ module draw(
     output [1:0] BLUE
     );
 
-        // Inputs
-        //reg master_clk;
-        //reg rst;
-
-        // Outputs
-        /*wire display_clk;
-        wire fall_clk;
-        wire pixel_clk;
-
-        clk_divider dv (
-            .clk(clk), 
-            .rst(rst), 
-            .fall_clk(fall_clk),
-            .segclk(segclk),
-            .dclk(dclk)
-        );
-    */
         wire [9:0] x, y;
         
         reg [9:0] HEIGHT_RATIO = 20;
@@ -70,6 +53,10 @@ module draw(
         reg [15:0] g = 0;
         reg [15:0] r = 0;
         reg [15:0] b = 0;
+        reg fall_g = 0;
+        reg fall_r = 0;
+        reg fall_b = 0;
+        
         always @(*) begin
             g[0] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
         //    r[0] = 0;
@@ -82,7 +69,8 @@ module draw(
             // RED - 10
             // GREEN - 01
             // BLUE - 11
-        
+            
+            // draw stack
             for (i = 1; i < 16; i = i + 1) begin
                 if ({colors[2*i+1], colors[2*i]} == 2'b10)
                     r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
@@ -93,11 +81,20 @@ module draw(
                 else if ({colors[2*i+1], colors[2*i]} == 2'b11)
                     b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
             end
+            
+            // draw falling block
+            if (fall_clr == 2'b10)
+                fall_r = (x > fall_x) & (x < fall_x + WIDTH) & (y > fall_y) & (y < fall_y + HEIGHT_RATIO);
+            if (fall_clr == 2'b01)
+                fall_g = (x > fall_x) & (x < fall_x + WIDTH) & (y > fall_y) & (y < fall_y + HEIGHT_RATIO);
+            if (fall_clr == 2'b11)
+                fall_b = (x > fall_x) & (x < fall_x + WIDTH) & (y > fall_y) & (y < fall_y + HEIGHT_RATIO);
+                
         end
         
-        assign RED = (|r)?7:0;
-        assign GREEN = (|g)?7:0;
-        assign BLUE = (|b)?3:0;
+        assign RED = ((|r)| fall_r)?7:0;
+        assign GREEN = ((|g)| fall_g)?7:0;
+        assign BLUE = ((|b)| fall_b)?3:0;
         
         //assign RED = ((x > 0) & (x < 300) & (y > 0) & (y < 300))?7:0;
         //assign GREEN = ((x > 200) & (x < 400) & (y > 150) & (y < 350))?7:0;

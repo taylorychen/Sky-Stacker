@@ -46,14 +46,13 @@ module falling_item(
         if(rst) begin
             x = rnd;
             y = 0;
-            
-            if(rnd[1:0] == 2'b00) begin
+            clr = rnd[1:0];
+            if(clr == 2'b00) begin
                 clr = cnt;
                 if(cnt == 2'b11)
                     cnt = 2'b01;
                 else begin
                     cnt = cnt + 1;
-                    clr = rnd[1:0];
                 end
             end //extract the last 2 bits --> either 0,1,2,3, use cnt if we yield 00 
             
@@ -62,20 +61,19 @@ module falling_item(
             if(y >= 400) begin //460-480 but can change value to smaller for testing
                 x = rnd;
                 y = 0;
-                
-                if(rnd[1:0] == 2'b00) begin
+                clr = rnd[1:0];
+                if(clr == 2'b00) begin
                     clr = cnt;
                     if(cnt == 2'b11)
                         cnt = 2'b01;
                     else begin
                         cnt = cnt + 1;
-                        clr = rnd[1:0];
                     end
                 end //extract the last 2 bits --> either 0,1,2,3, use cnt if we yield 00 
                 
             end
             else begin
-                y = y + 2; //5 represents the velocity at which the item falls (# of pixels that change vertically)
+                y = y + 15; //5 represents the velocity at which the item falls (# of pixels that change vertically)
             end
         end
     end

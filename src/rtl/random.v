@@ -53,7 +53,7 @@ module random(
           if (cnt == 10) begin
               cnt = 0;
               if(random > 10'b1001011000) begin
-                random_done = random - 430; //constant number to bring the range to 0-640
+                random_done = random - 530; //constant number to bring the range to 0-540
               end
               else begin
                 random_done = random; //assign the random number to output after 13 shifts

@@ -23,22 +23,22 @@ module game(
     wire [9:0] fall_y;
     wire [1:0] fall_clr;
 
-    // wire display_clk;
+    wire display_clk;
     // wire seg_clk;
-    // wire fall_clk;
+    wire fall_clk;
     
-   clk_divider dv (
+    clk_divider dv (
           .clk(clk), 
-          .rst(rst), 
+          .rst(start), 
           .fall_clk(fall_clk),
           .seg_clk(seg_clk),
           .dclk(display_clk)
       );
-    
+
     stack s(
     // inputs
         .clk (clk),
-        .rst (rst),
+        .rst (start),
         .left (left),
         .right (right),
     // outputs
@@ -47,17 +47,17 @@ module game(
         .height (stack_height),
         .colors (colors)
     );
-    
+
     falling_item f(
         .clk(clk),
-		.fall_clk(fall_clk), 
-		.rst(rst), 
-		.pause(pause), 
-		.pos_x(fall_x), 
-		.pos_y(fall_y), 
-		.color(fall_clr)
+        .fall_clk(fall_clk), 
+        .rst(start), 
+        .pause(pause), 
+        .pos_x(fall_x), 
+        .pos_y(fall_y), 
+        .color(fall_clr)
     );
-    
+
     draw d(
         //inputs
         .dclk (display_clk),
