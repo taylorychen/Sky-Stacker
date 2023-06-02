@@ -26,27 +26,27 @@ module stack(
     output [9:0] pos_x,
     output [9:0] pos_y,
     output [9:0] height,
-    output [31:0] colors
+   // output [31:0] colors
     );
 
     assign pos_x = 305;
     assign pos_y = 360;
     assign height = 1;
-    assign colors = 32'b00_00_00_00_00_00_00_00_00_10_10_11_11_10_11_01;
+   // assign colors = 32'b00_00_00_00_00_00_00_00_00_10_10_11_11_10_11_01;
 
     // FOR NEXT TIME
     // MOVEMENT
     // TODO: add thing that slows it down
-    reg [9:0] x;
-    always @(posedge clk, posedge rst) begin
+   // reg [9:0] x;
+    //always @(posedge clk, posedge rst) begin
 
 
 
 
 
-    end
+   // end
 
-    assigns pos_x = x; 
+   // assigns pos_x = x; 
 
 
 endmodule
