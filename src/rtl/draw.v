@@ -71,6 +71,7 @@ module draw(
             // BLUE - 11
             
             // draw stack
+            /*
             for (i = 1; i < 16; i = i + 1) begin
                 if ({colors[2*i+1], colors[2*i]} == 2'b10)
                     r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
@@ -81,6 +82,19 @@ module draw(
                 else if ({colors[2*i+1], colors[2*i]} == 2'b11)
                     b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
             end
+            */
+
+            for (i = 1; i < 16; i = i + 1) begin
+                if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b10)
+                    r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
+                
+                else if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b01)
+                    g[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
+                
+                else if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b11)
+                    b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
+            end
+        end
             
             // draw falling block
             if (fall_clr == 2'b10)
