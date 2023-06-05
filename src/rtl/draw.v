@@ -56,9 +56,12 @@ module draw(
         reg fall_g = 0;
         reg fall_r = 0;
         reg fall_b = 0;
+		  
+		  reg base;
         
         always @(*) begin
-            g[0] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
+            //g[0] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
+				base = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y + HEIGHT_RATIO) & (y < p_y + 2 * HEIGHT_RATIO);
         //    r[0] = 0;
         //    b[0] = 0;
         end
@@ -72,7 +75,7 @@ module draw(
             
             // draw stack
             
-            for (i = 1; i < 16; i = i + 1) begin
+            for (i = 0; i < 16; i = i + 1) begin
                 if ({colors[2*i+1], colors[2*i]} == 2'b10) begin
                     r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
                     g[i] = 0;
@@ -115,7 +118,7 @@ module draw(
         end
         
         assign RED = ((|r)| fall_r)?7:0;
-        assign GREEN = ((|g)| fall_g)?7:0;
+        assign GREEN = ((|g)| fall_g | base)?7:0;
         assign BLUE = ((|b)| fall_b)?3:0;
         
         //assign RED = ((x > 0) & (x < 300) & (y > 0) & (y < 300))?7:0;
