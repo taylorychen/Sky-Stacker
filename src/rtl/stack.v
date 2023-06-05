@@ -53,10 +53,10 @@ module stack(
        
     reg [31:0] c;
     wire [9:0] pos_y;
-    assign pos_y = BASE_Y - (height * HEIGHT_RATIO);
+    assign pos_y = BASE_Y - (h * HEIGHT_RATIO);
 
     // 15 denotes pixels of leeway
-    wire y_collide = (fall_y < pos_y + 15) & (fall_y > pos_y - 15);
+    wire y_collide = (fall_y < (400 + 30 - (h * 20))) & (fall_y > (400 - 5 - (h * 20)));
     wire x_collide = (fall_x < (x + 15)) & (fall_x > (x - 15));
     //wire test = fall_y > 200;
 
@@ -69,7 +69,7 @@ module stack(
             c = 32'b0;
         end
         else begin
-            if ((x_collide)) begin
+            if ((y_collide & x_collide)) begin
                 // remove falling object
                 collision = 1;
             
