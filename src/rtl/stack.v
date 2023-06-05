@@ -21,6 +21,7 @@
 module stack(
     input clk,
     input rst,
+	 input pause,
     input left,
     input right,
     input [9:0] fall_x,
@@ -58,7 +59,6 @@ module stack(
     // 15 denotes pixels of leeway
     wire y_collide = (fall_y < (400 + 30 - (h * 20))) & (fall_y > (400 - 5 - (h * 20)));
     wire x_collide = (fall_x < (x + 15)) & (fall_x > (x - 15));
-    //wire test = fall_y > 200;
 
     always @(posedge clk, posedge rst) begin
     
@@ -76,13 +76,9 @@ module stack(
                 h = h + 1;
                 c = c << 2;
                 c = c + fall_color;
-                //c = 32'b00_00_00_00_00_00_00_00_00_10_10_11_11_10_11_01;
 
                 //c = c >> 2;
                 //c = c + {fall_color, 30'b0};
-
-                // TODO: send signal to make falling object dissapear and new one appear
-                // TODO: send signal to change score
             end
             else begin
                 collision = 0;
@@ -90,32 +86,20 @@ module stack(
             
             divider <= divider + 1;
             if (divider == 0) begin
-                if (left == 1) begin
-                    if (x <= 640 - 150)
-                        x <= x + 1;
-                end
-                else if (right == 1) begin
-                    if (x > 0)
-                        x <= x - 1;
-                end
+					if(pause == 0) begin
+						 if (left == 1) begin
+							  if (x <= 640 - 150)
+									x <= x + 1;
+						 end
+						 else if (right == 1) begin
+							  if (x > 0)
+									x <= x - 1;
+						 end
+					end
             end
             
         end
     end
-   
-
-/*
-    always @(*) begin
-        if (y_collide & x_collide) begin
-            h = h + 1;
-            c = c >> 2;
-            c = c + {fall_color, 30'b0};
-
-            // TODO: send signal to make falling object dissapear and new one appear
-            // TODO: send signal to change score
-        end
-
-    end*/
 
     assign pos_x = x; 
     assign pos_y = BASE_Y;

@@ -73,7 +73,7 @@ module falling_item(
                 
             end
             else begin
-                y = y + 15; //5 represents the velocity at which the item falls (# of pixels that change vertically)
+                y = y + 5; //5 represents the velocity at which the item falls (# of pixels that change vertically)
             end
         end
     end

@@ -47,9 +47,7 @@ module draw(
         // reg [31:0] test_c = 32'b00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00;
 
         vga v(.clk (dclk), .HS (HS), .VS (VS), .x (x), .y (y));
-        
-        //wire burger = (x > p_x) & (x < p_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
-        
+                
         reg [15:0] g = 0;
         reg [15:0] r = 0;
         reg [15:0] b = 0;
@@ -60,23 +58,20 @@ module draw(
 		  reg base;
         
         always @(*) begin
-            //g[0] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y) & (y < p_y + h * HEIGHT_RATIO);
 				base = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y + HEIGHT_RATIO) & (y < p_y + 2 * HEIGHT_RATIO);
-        //    r[0] = 0;
-        //    b[0] = 0;
         end
                 
         integer i;
         always @(*) begin
             
-            // RED - 10
+            // BLUE - 10
             // GREEN - 01
-            // BLUE - 11
+            // RED - 11
             
             // draw stack
             
             for (i = 0; i < 16; i = i + 1) begin
-                if ({colors[2*i+1], colors[2*i]} == 2'b10) begin
+                if ({colors[2*i+1], colors[2*i]} == 2'b11) begin
                     r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
                     g[i] = 0;
                     b[i] = 0;
@@ -86,7 +81,7 @@ module draw(
                     r[i] = 0;
                     b[i] = 0;
                 end
-                else if ({colors[2*i+1], colors[2*i]} == 2'b11) begin
+                else if ({colors[2*i+1], colors[2*i]} == 2'b10) begin
                     b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
                     g[i] = 0;
                     r[i] = 0;
@@ -94,25 +89,13 @@ module draw(
                 
             end
             
-            /*
-            for (i = 1; i < 16; i = i + 1) begin
-                if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b10)
-                    r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
-                
-                else if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b01)
-                    g[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
-                
-                else if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b11)
-                    b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
-            end
-            */
             
             // draw falling block
-            if (fall_clr == 2'b10)
+            if (fall_clr == 2'b11)
                 fall_r = (x > fall_x) & (x < fall_x + WIDTH) & (y > fall_y) & (y < fall_y + HEIGHT_RATIO);
             if (fall_clr == 2'b01)
                 fall_g = (x > fall_x) & (x < fall_x + WIDTH) & (y > fall_y) & (y < fall_y + HEIGHT_RATIO);
-            if (fall_clr == 2'b11)
+            if (fall_clr == 2'b10)
                 fall_b = (x > fall_x) & (x < fall_x + WIDTH) & (y > fall_y) & (y < fall_y + HEIGHT_RATIO);
                 
         end
@@ -124,6 +107,5 @@ module draw(
         //assign RED = ((x > 0) & (x < 300) & (y > 0) & (y < 300))?7:0;
         //assign GREEN = ((x > 200) & (x < 400) & (y > 150) & (y < 350))?7:0;
         //assign BLUE = ((x > 300) & (x < 600) & (y > 180) & (y < 480))?3:0;
-
 
 endmodule

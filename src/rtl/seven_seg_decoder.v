@@ -20,13 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 module seven_seg_decoder(
     input [3:0] digit,
-    output ca,
-    output cb,
-    output cc,
-    output cd,
-    output ce,
-    output cf,
-    output cg
+    output reg ca,
+    output reg cb,
+    output reg cc,
+    output reg cd,
+    output reg ce,
+    output reg cf,
+    output reg cg
     );
 
 	always@(*) begin

@@ -35,7 +35,7 @@ module counter(
     
         if (rst == 1) begin
             sec_ones_cnt = 4'b0000;
-				sec_tens_cnt = 4'b1001;
+				sec_tens_cnt = 4'b0110;
 				end_sig = 0;
         end
 		  else if(pause == 0 && end_sig == 0) begin
