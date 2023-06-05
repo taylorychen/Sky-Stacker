@@ -23,7 +23,7 @@ module falling_item(
     input fall_clk,
     input rst,
     input pause,
-    //input collision,
+    input collision,
     output wire [9:0] pos_x,
     output wire [9:0] pos_y,
     output wire [1:0] color
@@ -42,8 +42,8 @@ module falling_item(
         .rnd(rnd)
     );
     
-    always @ (posedge fall_clk or posedge rst) begin   
-        if(rst) begin
+    always @ (posedge fall_clk or posedge rst or posedge collision) begin   
+        if(rst | collision) begin
             x = rnd;
             y = 0;
             clr = rnd[1:0];

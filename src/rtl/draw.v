@@ -44,7 +44,7 @@ module draw(
         reg [9:0] p_y = 400;
         reg [9:0] h = 1;
         
-        // reg [31:0] colors = 32'b00_00_00_00_00_00_00_00_00_10_10_11_11_10_11_01;
+        // reg [31:0] test_c = 32'b00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00;
 
         vga v(.clk (dclk), .HS (HS), .VS (VS), .x (x), .y (y));
         
@@ -71,19 +71,27 @@ module draw(
             // BLUE - 11
             
             // draw stack
-            /*
+            
             for (i = 1; i < 16; i = i + 1) begin
-                if ({colors[2*i+1], colors[2*i]} == 2'b10)
+                if ({colors[2*i+1], colors[2*i]} == 2'b10) begin
                     r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
-                
-                else if ({colors[2*i+1], colors[2*i]} == 2'b01)
+                    g[i] = 0;
+                    b[i] = 0;
+                end
+                else if ({colors[2*i+1], colors[2*i]} == 2'b01) begin
                     g[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
-                
-                else if ({colors[2*i+1], colors[2*i]} == 2'b11)
+                    r[i] = 0;
+                    b[i] = 0;
+                end
+                else if ({colors[2*i+1], colors[2*i]} == 2'b11) begin
                     b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
+                    g[i] = 0;
+                    r[i] = 0;
+                end
+                
             end
-            */
-
+            
+            /*
             for (i = 1; i < 16; i = i + 1) begin
                 if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b10)
                     r[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
@@ -94,7 +102,7 @@ module draw(
                 else if ({colors[32 - 2*i], colors[32 - 2*i-1]} == 2'b11)
                     b[i] = (x > pos_x) & (x < pos_x + WIDTH) & (y > p_y - i * HEIGHT_RATIO) & (y < p_y - (i-1) * HEIGHT_RATIO);
             end
-        end
+            */
             
             // draw falling block
             if (fall_clr == 2'b10)
