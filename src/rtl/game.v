@@ -85,5 +85,13 @@ module game(
     );
     
 
+	/*counter c(
+		.one_hz_clk(),
+		.rst(start),
+		.pause(pause),
+		.sec_ones(),
+		.sec_tens(),
+		.end_game()
+	);*/
 
 endmodule
