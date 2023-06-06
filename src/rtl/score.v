@@ -35,12 +35,12 @@ module score(
         if(rst) begin
             curr_score = 7'b0;
         end
-        else /*if(collision == 1)*/ begin
+        else begin
             if(color == 2'b01) // GREEN
                 curr_score = curr_score + 2;
             else if(color == 2'b10) // BLUE
                 curr_score = curr_score + 5;
-            else if(color == 2'b11) // RED
+            else if(color == 2'b11 & curr_score >= 3) // RED
                 curr_score = curr_score - 3;
         end
     end

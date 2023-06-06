@@ -84,10 +84,8 @@ module game(
     draw d(
         //inputs
         .dclk (display_clk),
-        //.rst (start),
         .pos_x (stack_x),
-        //.[9:0] pos_y (),
-        //.[9:0] height (),
+        .pos_y (stack_y),
         .colors (colors),
         .fall_x(fall_x),
         .fall_y(fall_y),

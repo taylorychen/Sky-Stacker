@@ -31,23 +31,6 @@ module clk_divider(
     reg [31:0] fall_cnt;
 	 reg [31:0] digit_cnt;
 	 reg [31:0] one_cnt;
-
-    // pixel clock
-    /*
-    always @(posedge master_clk or posedge rst) begin
-        if (rst == 1) begin
-            pixel_cnt <= 32'd0;
-            pixel_clk <= 1'b0;   
-        end
-        
-        else if (pixel_cnt == 32'd3 - 1'b1) begin
-            pixel_clk <= ~pixel_clk;
-            pixel_cnt <= 32'd0;
-        end
-        else
-            pixel_cnt <= pixel_cnt + 1'b1;
-    end
-    */
     
     // fall clk - 12.5 Hz
     always @(posedge clk or posedge rst) begin
