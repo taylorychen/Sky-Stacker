@@ -52,8 +52,8 @@ module random(
           
           if (cnt == 10) begin
               cnt = 0;
-              if(random > 10'd600) begin
-                random_done = random / 5; //constant number to bring the range to 0-540
+              if(random > 10'd530) begin
+                random_done = random / 3; //constant number to bring the range to 0-540
               end
               else begin
                 random_done = random; //assign the random number to output after 13 shifts
