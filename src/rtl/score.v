@@ -40,8 +40,11 @@ module score(
                 curr_score = curr_score + 2;
             else if(color == 2'b10) // BLUE
                 curr_score = curr_score + 5;
-            else if(color == 2'b11 & curr_score >= 3) // RED
-                curr_score = curr_score - 3;
+            else if(color == 2'b11) // RED
+					 if(curr_score < 3)
+						curr_score = 0;
+                else
+						curr_score = curr_score - 3;
         end
     end
     

@@ -6,3 +6,4 @@
 /src/rtl/*.zip
 !/src/tb/*
 !.gitignore
+!*.xise
