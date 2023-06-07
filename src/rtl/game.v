@@ -46,7 +46,6 @@ module game(
           .clk(clk), 
           .rst(rst_debounced), 
           .fall_clk(fall_clk),
-          .seg_clk(seg_clk),
           .dclk(display_clk),
 			 .digit_clk(digit_clk),
 			 .one_hz_clk(one_hz_clk)
