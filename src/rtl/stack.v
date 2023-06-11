@@ -29,7 +29,6 @@ module stack(
     input [1:0] fall_color,
     output [9:0] pos_x,
     output [9:0] pos_y,
-    output wire [9:0] height,
     output [31:0] colors,
     output reg collision
     );
@@ -113,7 +112,6 @@ module stack(
 
     assign pos_x = x; 
     assign pos_y = BASE_Y;
-    assign height = h;
     assign colors = c;
     
 endmodule

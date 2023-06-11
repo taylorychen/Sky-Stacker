@@ -60,6 +60,16 @@ module score_tb;
 		color = 2'b01;
 		#3
 		collision = 0;
+		#5
+		collision = 1;
+		color = 2'b10;
+		#3
+		collision = 0;
+		#5
+		collision = 1;
+		color = 2'b11;
+		#3
+		collision = 0;
 		
 	end
 	

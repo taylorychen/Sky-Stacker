@@ -16,7 +16,6 @@ module game(
     
     wire [9:0] stack_x;
     wire [9:0] stack_y;
-    wire [9:0] stack_height;
     wire [31:0] colors;
     
     wire [9:0] fall_x;
@@ -46,7 +45,6 @@ module game(
           .clk(clk), 
           .rst(rst_debounced), 
           .fall_clk(fall_clk),
-          .seg_clk(seg_clk),
           .dclk(display_clk),
 			 .digit_clk(digit_clk),
 			 .one_hz_clk(one_hz_clk)
@@ -76,7 +74,6 @@ module game(
     // outputs
         .pos_x (stack_x),
         .pos_y (stack_y),
-        .height (stack_height),
         .colors (colors),
         .collision (collision)
     );
